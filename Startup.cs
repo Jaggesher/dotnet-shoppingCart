@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using dotnet_shoppingCart.Data;
 using dotnet_shoppingCart.Models;
+using dotnet_shoppingCart.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +38,7 @@ namespace dotnet_shoppingCart
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-            //services.AddSingleton<IJwtFactoryService,JwtFactoryService>();
+            services.AddSingleton<IJwtFactoryService,JwtFactoryService>();
            
 
             var jwtAppsettingsOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
