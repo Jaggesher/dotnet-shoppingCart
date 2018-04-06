@@ -38,8 +38,9 @@ namespace dotnet_shoppingCart
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-            services.AddSingleton<IJwtFactoryService,JwtFactoryService>();
-           
+            services.AddSingleton<IJwtFactoryService, JwtFactoryService>();
+            services.AddSingleton<IAdminService, AdminService>();
+
 
             var jwtAppsettingsOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
 
@@ -51,7 +52,7 @@ namespace dotnet_shoppingCart
                     Options.Audience = jwtAppsettingsOptions[nameof(JwtIssuerOptions.Audience)];
                     Options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
                 });
-        
+
             var tokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
@@ -81,9 +82,9 @@ namespace dotnet_shoppingCart
 
             services.AddAuthorization(Options =>
                 {
-                    Options.AddPolicy("ApiUser", policy => policy.RequireClaim("rol","ApiAccess"));
+                    Options.AddPolicy("ApiUser", policy => policy.RequireClaim("rol", "ApiAccess"));
                 });
-                
+
             services.AddMvc();
         }
 
