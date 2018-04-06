@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using dotnet_shoppingCart.Services;
 using dotnet_shoppingCart.Helpers;
+using System.Threading.Tasks;
 
 namespace dotnet_shoppingCart.Controllers
 {
@@ -17,13 +18,6 @@ namespace dotnet_shoppingCart.Controllers
             _adminService = adminService;
         }
 
-        [HttpPost("AddCategory")]
-
-        public IActionResult Post()
-        {
-            return Ok();
-        }
-
         [HttpPost("AddProduct")]
         public IActionResult Post([FromForm] ProductViewModel model)
         {
@@ -32,11 +26,33 @@ namespace dotnet_shoppingCart.Controllers
             //return Ok(model.ProductImage.Name);
         }
 
-        [HttpGet]
-
-        public IActionResult Get()
+        [HttpPost("AddCategory")]
+        public async Task<IActionResult> Post( [FromBody] CategoryViewmodel model)
         {
-            return Ok("Things Works");
+            if(!ModelState.IsValid) return BadRequest(ModelState);
+            
+            var result = await _adminService.AddCategory(model);
+
+            return new OkObjectResult(new { Message =  "Success"});
+
         }
+
+        [HttpGet("AllCategory")]
+
+        public async Task<IActionResult> Get()
+        {
+            var result = await _adminService.AllCategory();
+            return new OkObjectResult(result);
+        }
+
+        [HttpGet("AllShipments")]
+
+        public async Task<IActionResult> GetShipments()
+        {
+            var result = await _adminService.AllShipments();
+            return new OkObjectResult(result);
+        }
+
+
     }
 }
