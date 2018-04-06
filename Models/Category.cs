@@ -8,7 +8,8 @@ namespace dotnet_shoppingCart.Models
         public Guid Id { get; set; }
 
         [Required]
-        public String CategoryName { get; set; }
+        [StringLength(50)]
+        public String ProductCategory { get; set; }
 
     }
 }

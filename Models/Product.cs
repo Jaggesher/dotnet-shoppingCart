@@ -15,6 +15,13 @@ namespace dotnet_shoppingCart.Models
         public Category Category { get; set; }
 
         [Required]
+        [StringLength(1000)]
         public String Description { get; set; }
+
+        [Required]
+        public int InStock { get; set; }
+
+        [Required]
+        public int Price { get; set; }
     }
 }
