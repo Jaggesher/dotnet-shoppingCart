@@ -15,6 +15,9 @@ namespace dotnet_shoppingCart.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Shipment> Shipments { get; set; }
+
+        public DbSet<OrderedProduct> OrderedProducts { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
