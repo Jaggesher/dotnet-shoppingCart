@@ -96,6 +96,8 @@ namespace dotnet_shoppingCart
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+            
             app.UseAuthentication();
             app.UseMvc();
         }

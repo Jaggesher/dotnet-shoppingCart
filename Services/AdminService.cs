@@ -29,9 +29,21 @@ namespace dotnet_shoppingCart.Services
 
         }
 
-        public Task<bool> AddProduct(ProductViewModel newProduct)
+        public async Task<bool> AddProduct(ProductViewModel newProduct, String Path, Guid id)
         {
-            throw new NotImplementedException();
+            var entity = new Product
+            {
+                Id = id,
+                Img = Path,
+                CategoryId = newProduct.CategoryId,
+                Description = newProduct.Description,
+                InStock = (int) newProduct.InStock,
+                Price = (int)newProduct.Price
+            };
+
+            _dbContex.Products.Add(entity);
+            return 1 == await _dbContex.SaveChangesAsync();
+            
         }
 
         public async Task<IEnumerable<Category>> AllCategory()
