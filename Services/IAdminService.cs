@@ -10,7 +10,7 @@ namespace dotnet_shoppingCart.Services
     {
         Task<bool> AddCategory(CategoryViewmodel newCategory);
         Task<IEnumerable<Category>> AllCategory();
-        Task<bool> AddProduct(ProductViewModel newProduct, String Path, Guid id);
+        Task<bool> AddProduct(ProductViewModel newProduct, String Path);
         Task<IEnumerable<Shipment>> AllShipments();
         
     }

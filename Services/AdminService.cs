@@ -29,11 +29,11 @@ namespace dotnet_shoppingCart.Services
 
         }
 
-        public async Task<bool> AddProduct(ProductViewModel newProduct, String Path, Guid id)
+        public async Task<bool> AddProduct(ProductViewModel newProduct, String Path)
         {
             var entity = new Product
             {
-                Id = id,
+                Id = new Guid(),
                 Img = Path,
                 CategoryId = newProduct.CategoryId,
                 Description = newProduct.Description,

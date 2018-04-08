@@ -31,9 +31,7 @@ namespace dotnet_shoppingCart.Controllers
             var extension = Path.GetExtension(model.Img.FileName);
 
             if (!allowedExtensions.Contains(extension.ToLower()) || (model.Img.Length > 2000000)) return BadRequest(Errors.AddErrorToModelState("img", "Select jpg or jpeg or png less than 2Μ.", ModelState));
-
-            Guid id = new Guid();
-            var fileName = Path.Combine("Products", id + extension);
+            var fileName = Path.Combine("Products", DateTime.Now.Ticks + extension);
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", fileName);
 
             try
@@ -50,7 +48,7 @@ namespace dotnet_shoppingCart.Controllers
                 return BadRequest(Errors.AddErrorToModelState("Message", "Somethins Went Wrong", ModelState));
             }
 
-            if (await _adminService.AddProduct(model, fileName, id))
+            if (await _adminService.AddProduct(model, fileName))
                 return new OkObjectResult(new { Message = "Success" });
 
             return BadRequest(Errors.AddErrorToModelState("Message", "Somethins Went Wrong", ModelState));
