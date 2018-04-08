@@ -8,6 +8,8 @@ namespace dotnet_shoppingCart.Services
 {
     public interface IGeneralService
     {
-         
+        Task<bool> AddShipment(ShipmentViewModel newShipment);
+        Task<IEnumerable<Product>> AllProducts();
+        
     }
 }

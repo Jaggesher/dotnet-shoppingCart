@@ -10,6 +10,20 @@ namespace dotnet_shoppingCart.Services
 {
     public class GeneralService : IGeneralService
     {
-        
+        private readonly ApplicationDbContext _dbContex;
+        public GeneralService(ApplicationDbContext dbContext)
+        {
+            _dbContex = dbContext;
+        }
+
+        public Task<bool> AddShipment(ShipmentViewModel newShipment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Product>> AllProducts()
+        {
+            return await _dbContex.Products.ToListAsync();
+        }
     }
 }
