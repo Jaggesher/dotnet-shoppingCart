@@ -10,6 +10,6 @@ namespace dotnet_shoppingCart.Services
     {
         Task<bool> AddShipment(ShipmentViewModel newShipment);
         Task<IEnumerable<Product>> AllProducts();
-        
+        Task<Product> SingleProduct(Guid Id);
     }
 }

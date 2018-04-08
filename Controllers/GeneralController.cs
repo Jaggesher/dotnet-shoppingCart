@@ -21,6 +21,12 @@ namespace dotnet_shoppingCart.Controllers
             return Ok("Things Works");
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProduct(Guid id)
+        {
+            var result = await _generalService.SingleProduct(id);
+            return new OkObjectResult(result);
+        }
 
         [HttpGet("AllProducts")]
         public async Task<IActionResult> AllProducts()
