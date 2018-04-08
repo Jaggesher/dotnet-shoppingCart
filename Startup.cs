@@ -40,6 +40,7 @@ namespace dotnet_shoppingCart
 
             services.AddSingleton<IJwtFactoryService, JwtFactoryService>();
             services.AddSingleton<IAdminService, AdminService>();
+            services.AddSingleton<IGeneralService,GeneralService>();
 
 
             var jwtAppsettingsOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
