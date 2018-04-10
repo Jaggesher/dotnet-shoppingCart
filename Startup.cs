@@ -40,7 +40,13 @@ namespace dotnet_shoppingCart
 
             services.AddSingleton<IJwtFactoryService, JwtFactoryService>();
             services.AddSingleton<IAdminService, AdminService>();
-            services.AddSingleton<IGeneralService,GeneralService>();
+            services.AddSingleton<IGeneralService, GeneralService>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://localhost:4200"));
+            });
 
 
             var jwtAppsettingsOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
@@ -97,8 +103,11 @@ namespace dotnet_shoppingCart
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AllowSpecificOrigin");
+            
             app.UseStaticFiles();
             
+
             app.UseAuthentication();
             app.UseMvc();
         }
