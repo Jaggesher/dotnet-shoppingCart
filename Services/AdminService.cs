@@ -53,7 +53,8 @@ namespace dotnet_shoppingCart.Services
 
         public async Task<IEnumerable<Shipment>> AllShipments()
         {
-            return await _dbContex.Shipments.Include(b => b.OrderedProduct).ToListAsync();
+            return await _dbContex.Shipments.ToListAsync();
+            //return await _dbContex.Shipments.Include(b => b.OrderedProduct).ToListAsync();
         }
     }
 }
