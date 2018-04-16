@@ -27,6 +27,12 @@ namespace dotnet_shoppingCart.Services
             return await _dbContex.Products.ToListAsync();
         }
 
+        public async Task<IEnumerable<Product>> AllProductsByIds(IDsViewModel IDs)
+        {
+            return await _dbContex.Products.Where(X => IDs.Ids.Contains(X.Id)).Include(Y => Y.Category).ToListAsync();
+            throw new NotImplementedException();
+        }
+
         public async Task<Product> SingleProduct(Guid Id)
         {
             return await _dbContex.Products.Where(X => X.Id == Id).Include(X => X.Category).FirstAsync();

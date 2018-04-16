@@ -37,9 +37,11 @@ namespace dotnet_shoppingCart.Controllers
         }
 
         [HttpPost("GetByIDs")]
-        public IActionResult ProductsByIds([FromBody] IDsViewModel model)
+        public async Task<IActionResult> ProductsByIds([FromBody] IDsViewModel model)
         {
-            return Json(model);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var result = await _generalService.AllProductsByIds(model);
+            return new OkObjectResult(result);
         }
     }
 }
