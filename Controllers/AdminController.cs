@@ -84,6 +84,15 @@ namespace dotnet_shoppingCart.Controllers
             return new OkObjectResult(result);
         }
 
+        [HttpPost("confirmShipment")]
+        public async Task<IActionResult> confirmShipment([FromForm]Guid id){
+            
+            if(id == null) return BadRequest(new { Message = "Given Id Is Null"});
+
+            if (await _adminService.ConfirmOrder(id))
+                return new OkObjectResult(new { Message = "Success" });
+            return BadRequest(new { Message = "SomeThing Went Wrong"});
+        }
 
     }
 }

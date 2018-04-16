@@ -23,7 +23,7 @@ namespace dotnet_shoppingCart.Services
                 Id = new Guid(),
                 ProductCategory = newCategory.ProductCategory
             };
-            
+
             _dbContex.Categories.Add(entity);
             return 1 == await _dbContex.SaveChangesAsync();
 
@@ -37,13 +37,13 @@ namespace dotnet_shoppingCart.Services
                 Img = Path,
                 CategoryId = newProduct.CategoryId,
                 Description = newProduct.Description,
-                InStock = (int) newProduct.InStock,
+                InStock = (int)newProduct.InStock,
                 Price = (int)newProduct.Price
             };
 
             _dbContex.Products.Add(entity);
             return 1 == await _dbContex.SaveChangesAsync();
-            
+
         }
 
         public async Task<IEnumerable<Category>> AllCategory()
@@ -55,6 +55,20 @@ namespace dotnet_shoppingCart.Services
         {
             return await _dbContex.Shipments.ToListAsync();
             //return await _dbContex.Shipments.Include(b => b.OrderedProduct).ToListAsync();
+        }
+
+        public async Task<bool> ConfirmOrder(Guid id)
+        {
+            var context = await _dbContex.Shipments.FindAsync(id);
+
+            try{
+                context.IsDelivered = true;
+                var result = await _dbContex.SaveChangesAsync();
+                return result == 1;
+            }catch(Exception e){
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
     }
 }

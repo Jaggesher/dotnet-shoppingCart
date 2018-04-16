@@ -12,6 +12,7 @@ namespace dotnet_shoppingCart.Services
         Task<IEnumerable<Category>> AllCategory();
         Task<bool> AddProduct(ProductViewModel newProduct, String Path);
         Task<IEnumerable<Shipment>> AllShipments();
+        Task<bool> ConfirmOrder(Guid id);
         
     }
 }
