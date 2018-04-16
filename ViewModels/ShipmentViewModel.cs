@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace dotnet_shoppingCart.ViewModels
@@ -19,6 +20,13 @@ namespace dotnet_shoppingCart.ViewModels
         [StringLength(30, ErrorMessage = "The {0} Must be at least {2} and at most {1} characters long.", MinimumLength = 3)]
         [Display(Name = "Phone")]
         public String Phone { get; set; }
+
+        [Required]
+        public uint TotalCost { get; set; }
+
+        [Required]
+        public List<OrderProductViewModel> OrderProduct { get; set; }
+        
 
     }
 }

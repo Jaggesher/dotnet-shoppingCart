@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using dotnet_shoppingCart.Services;
 using dotnet_shoppingCart.ViewModels;
+using dotnet_shoppingCart.Helpers;
 
 namespace dotnet_shoppingCart.Controllers
 {
@@ -42,6 +43,18 @@ namespace dotnet_shoppingCart.Controllers
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var result = await _generalService.AllProductsByIds(model);
             return new OkObjectResult(result);
+        }
+
+        [HttpPost("StoreShipment")]
+
+        public async Task<IActionResult> StoreShipment([FromBody] ShipmentViewModel model)
+        {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
+            
+             if (await _generalService.AddShipment(model))
+                return new OkObjectResult(new { Message = "Success" });
+
+            return BadRequest(Errors.AddErrorToModelState("Message", "Somethins Went Wrong", ModelState));
         }
     }
 }
