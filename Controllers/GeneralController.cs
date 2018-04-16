@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using dotnet_shoppingCart.Services;
+using dotnet_shoppingCart.ViewModels;
 
 namespace dotnet_shoppingCart.Controllers
 {
@@ -33,6 +34,12 @@ namespace dotnet_shoppingCart.Controllers
         {
             var result = await _generalService.AllProducts();
             return new OkObjectResult(result);
+        }
+
+        [HttpPost("GetByIDs")]
+        public IActionResult ProductsByIds([FromBody] IDsViewModel model)
+        {
+            return Json(model);
         }
     }
 }
