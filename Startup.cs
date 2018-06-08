@@ -39,8 +39,8 @@ namespace dotnet_shoppingCart
             .AddDefaultTokenProviders();
 
             services.AddSingleton<IJwtFactoryService, JwtFactoryService>();
-            services.AddSingleton<IAdminService, AdminService>();
-            services.AddSingleton<IGeneralService, GeneralService>();
+            services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<IGeneralService, GeneralService>();
 
             services.AddCors(options =>
             {
