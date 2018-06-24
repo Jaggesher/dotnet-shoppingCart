@@ -128,7 +128,7 @@ This project implements simple single shop shopping cart idea. This project only
     * Return: Success Or Fail Messages.
      
    
-   **These are most inportant APIs for this project, there are many more additional apis for this visit projects controller files.**
+   **These are most important APIs for this project, there are many more additional APIs for this visit projects controller files.**
    
    
    <hr>
